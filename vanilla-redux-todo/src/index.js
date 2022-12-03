@@ -19,13 +19,25 @@ const reducer = (state = [], action) => {
 }
 const store = createStore(reducer);
 
-store.subscribe(() => console.log(store.getState()));
+const paintToDos = () => {
+  const toDos = store.getState();
+  toDos.forEach(toDo => {
+    const li = document.createElement("li");
+    li.id = toDo.id;
+    li.innerText = toDo.text;
+    ul.appendChild(li);
+  });
+}
+store.subscribe(paintToDos);
 
+const addToDo = (text) => {
+  store.dispatch({ type: ADD_TODO, text, id: Date.now() });
+}
 const onSubmit = e => {
   e.preventDefault();
   const toDo = input.value;
   input.value = "";
-  store.dispatch({ type: ADD_TODO, text: toDo, id: Date.now() });
+  addToDo(toDo);
 }
 
 form.addEventListener("submit", onSubmit);
