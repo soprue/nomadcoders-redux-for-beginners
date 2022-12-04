@@ -5,8 +5,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 function Detail() {
     const id = useParams().id;
     const toDos = useSelector((state) => state);
-    const toDo = toDos.find((toDo) => toDo.id === parseInt(id));
-    const others = toDos.filter((toDo) => toDo.id !== parseInt(id));
+    const toDo = toDos.toDoReducer.find((toDo) => toDo.id === parseInt(id));
+    const others = toDos.toDoReducer.filter((toDo) => toDo.id !== parseInt(id));
 
     const navigate = useNavigate();
     const onClickBackBtn = () => navigate(-1);

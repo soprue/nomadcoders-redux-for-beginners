@@ -1,9 +1,7 @@
-import { createStore } from "redux";
-
 const ADD = "ADD";
 const DELETE = "DELETE";
 
-const reducer = (state = [], action) => {
+const toDoReducer = (state = [], action) => {
     switch (action.type) {
         case ADD:
             return [{ text: action.text, id: action.id }, ...state];
@@ -14,6 +12,4 @@ const reducer = (state = [], action) => {
     }
 }
 
-const store = createStore(reducer);
-
-export default store;
+export default toDoReducer;

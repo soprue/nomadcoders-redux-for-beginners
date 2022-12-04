@@ -26,7 +26,7 @@ function Home() {
                 <button>ADD</button>
             </form>
             <ul>
-                {toDos.map((toDo) => (
+                {toDos.toDoReducer.map((toDo) => (
                     <ToDo {...toDo} key={toDo.id} />
                 ))}
             </ul>
