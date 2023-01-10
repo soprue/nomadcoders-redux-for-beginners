@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
+import { add } from "../reducers/toDo";
 
 import ToDo from '../components/ToDo';
 
 function Home() {
     const [text, setText] = useState("");
-    const toDos = useSelector((state) => state);
+    let toDos = useSelector((state) => state);
+    toDos = toDos.toDoReducer;
     const dispatch = useDispatch();
 
     function onChange(e) {
@@ -14,7 +16,7 @@ function Home() {
 
     function onSubmit(e) {
         e.preventDefault();
-        dispatch({ type: "TODO/ADD", payload: {text, id: Date.now()} });
+        dispatch(add({ text, id: Date.now() }));
         setText("");
     }
 
@@ -26,7 +28,7 @@ function Home() {
                 <button>ADD</button>
             </form>
             <ul>
-                {toDos.toDoReducer.map((toDo) => (
+                {toDos.map((toDo) => (
                     <ToDo {...toDo} key={toDo.id} />
                 ))}
             </ul>
