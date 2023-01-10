@@ -6,7 +6,7 @@ function ToDo({ text, id }) {
     const dispatch = useDispatch();
 
     const onClick = () => {
-        dispatch({ type: "DELETE", id });
+        dispatch({ type: "TODO/DELETE", payload: {id} });
     };
 
     return (

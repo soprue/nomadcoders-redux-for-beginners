@@ -14,7 +14,7 @@ function Home() {
 
     function onSubmit(e) {
         e.preventDefault();
-        dispatch({ type: "ADD", text, id: Date.now() });
+        dispatch({ type: "TODO/ADD", payload: {text, id: Date.now()} });
         setText("");
     }
 
