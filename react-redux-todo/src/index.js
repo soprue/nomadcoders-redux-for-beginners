@@ -1,25 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
-import { createStore } from 'redux';
 import { Provider } from "react-redux";
-import reducers from "./reducers";
+
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
+import store from "./store/index"
 
 import App from "./App";
-
-const persistedState = localStorage.getItem('reduxState')
-  ? JSON.parse(localStorage.getItem('reduxState'))
-  : {};
-
-const store = createStore(reducers, persistedState);
-
-store.subscribe(() => {
-    localStorage.setItem('reduxState', JSON.stringify(store.getState()))
-});
+ 
+const persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <Provider store={store}>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+            <App />
+        </PersistGate>
     </Provider>
 );
